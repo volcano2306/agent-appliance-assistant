@@ -1,0 +1,23 @@
+{
+  "userId": "fixture-user",
+  "conversationId": "fixture-conversation",
+  "requestId": "fixture-request",
+  "historyRevision": 4,
+  "summaryVersion": 1,
+  "policyVersion": "session-memory-v1",
+  "summarizedThroughTurnSeq": 1,
+  "summary": {
+    "device": [{"text": "用户陈述洗衣机型号M100", "source": "u1"}],
+    "currentIssue": [], "attempts": [], "constraints": [],
+    "openQuestions": [], "evidenceRefs": [], "background": []
+  },
+  "pendingTurns": [],
+  "recentTurns": [{
+    "turnSeq": 2, "requestId": "previous-request",
+    "user": {"messageId": "message-u2", "role": "user", "content": "型号更正为M100-Pro"},
+    "assistant": {"messageId": "message-a2", "role": "ai", "content": "已理解您的型号更正。"}
+  }],
+  "sourceMap": {"u1": {"messageId": "message-u1", "turnSeq": 1, "role": "user", "evidenceRefs": []}},
+  "executionVersion": 1,
+  "memoryStatus": "ok"
+}

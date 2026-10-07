@@ -1,0 +1,327 @@
+/* ========== 页面基础 ========== */
+page {
+  background: linear-gradient(180deg, #1b5846 0%, #236a57 35%, #1f5e4d 100%);
+}
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1b5846 0%, #236a57 35%, #1f5e4d 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== 自定义导航栏 ========== */
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, rgba(22, 78, 62, 0.95) 0%, rgba(22, 78, 62, 0.55) 68%, rgba(22, 78, 62, 0) 100%);
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 32rpx;
+  position: relative;
+}
+
+.nav-ai-btn {
+  width: 64rpx;
+  height: 64rpx;
+  background: #E9AE0E;
+  border-radius: 20rpx 8rpx 20rpx 8rpx;
+  flex-shrink: 0;
+}
+
+.nav-search {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12rpx;
+  flex-shrink: 0;
+}
+
+.nav-icon-img {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.nav-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #ffffff;
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ========== 可滚动区域 ========== */
+.main-scroll {
+  background: transparent;
+}
+
+.content-area {
+  padding: 18rpx 24rpx 32rpx;
+}
+
+.entry-banner {
+  border-radius: 24rpx;
+  padding: 24rpx;
+  background: linear-gradient(120deg, rgba(109, 148, 56, 0.35) 0%, rgba(84, 136, 70, 0.22) 45%, rgba(59, 110, 59, 0.35) 100%);
+  border: 2rpx solid rgba(194, 213, 88, 0.35);
+  box-shadow: 0 10rpx 24rpx rgba(12, 44, 34, 0.25);
+}
+
+.entry-tag {
+  display: inline-block;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #8a6300;
+  background: #f4c229;
+  border-radius: 10rpx;
+  padding: 6rpx 14rpx;
+}
+
+.entry-title-row {
+  margin-top: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.entry-title {
+  font-size: 46rpx;
+  font-weight: 700;
+  color: #e8f5e8;
+}
+
+.entry-cta {
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #f4c229;
+}
+
+.entry-desc {
+  margin-top: 14rpx;
+  font-size: 28rpx;
+  color: rgba(225, 238, 227, 0.78);
+  line-height: 1.5;
+}
+
+.section-block {
+  margin-top: 34rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 52rpx;
+  font-weight: 700;
+  color: #e9f3eb;
+  letter-spacing: 1rpx;
+  margin-bottom: 18rpx;
+}
+
+.service-row {
+  display: flex;
+}
+
+.service-card {
+  flex: 1;
+  min-height: 188rpx;
+  border-radius: 20rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.12);
+  background: rgba(137, 179, 165, 0.25);
+  padding: 18rpx 16rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 18rpx;
+}
+
+.service-card:last-child {
+  margin-right: 0;
+}
+
+.service-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 20rpx;
+  background: rgba(170, 171, 74, 0.72);
+  color: #f7ffef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.service-title {
+  margin-top: 16rpx;
+  font-size: 38rpx;
+  color: #f2f9f3;
+  font-weight: 700;
+}
+
+.service-desc {
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: rgba(224, 235, 227, 0.74);
+}
+
+.remote-card {
+  border-radius: 24rpx;
+  border: 2rpx solid rgba(189, 214, 204, 0.2);
+  background: rgba(116, 162, 147, 0.25);
+  padding: 22rpx;
+  box-shadow: 0 8rpx 20rpx rgba(8, 38, 30, 0.2);
+}
+
+.remote-head {
+  display: flex;
+  align-items: center;
+}
+
+.remote-avatar {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 24rpx;
+  background: linear-gradient(160deg, #2f9d7e 0%, #337e73 100%);
+}
+
+.remote-copy {
+  margin-left: 18rpx;
+  flex: 1;
+}
+
+.remote-title {
+  display: block;
+  font-size: 42rpx;
+  color: #ebf8ee;
+  font-weight: 700;
+}
+
+.remote-desc {
+  display: block;
+  margin-top: 6rpx;
+  font-size: 28rpx;
+  color: rgba(221, 235, 224, 0.75);
+}
+
+.remote-tags {
+  margin-top: 18rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag-chip {
+  font-size: 24rpx;
+  color: #d8ebe0;
+  border: 1rpx solid rgba(209, 232, 217, 0.26);
+  border-radius: 12rpx;
+  padding: 8rpx 16rpx;
+  background: rgba(99, 143, 128, 0.32);
+  margin-right: 12rpx;
+  margin-bottom: 10rpx;
+}
+
+.remote-footer {
+  margin-top: 18rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid rgba(210, 231, 219, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remote-fee {
+  font-size: 32rpx;
+  color: #f0bf1b;
+  font-weight: 700;
+}
+
+.remote-btn {
+  min-width: 168rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  background: #f0bf1b;
+  color: #2c614e;
+  font-size: 30rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.after-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.after-card {
+  width: calc((100% - 12rpx) / 2);
+  border-radius: 18rpx;
+  border: 1rpx solid rgba(206, 229, 217, 0.18);
+  background: rgba(106, 155, 140, 0.24);
+  padding: 18rpx;
+  box-sizing: border-box;
+  margin-bottom: 12rpx;
+}
+
+.after-title {
+  display: block;
+  font-size: 32rpx;
+  color: #e7f5eb;
+  font-weight: 700;
+}
+
+.after-desc {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: rgba(219, 233, 223, 0.72);
+}
+
+.utility-item {
+  margin-bottom: 12rpx;
+  border-radius: 18rpx;
+  border: 1rpx solid rgba(207, 229, 218, 0.2);
+  background: rgba(97, 146, 130, 0.24);
+  padding: 20rpx 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.utility-main {
+  flex: 1;
+}
+
+.utility-title {
+  display: block;
+  font-size: 34rpx;
+  color: #e8f4ea;
+  font-weight: 700;
+}
+
+.utility-subtitle {
+  display: block;
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: rgba(217, 232, 221, 0.72);
+}
+
+.utility-arrow {
+  width: 48rpx;
+  text-align: center;
+  font-size: 34rpx;
+  color: rgba(226, 237, 229, 0.74);
+}

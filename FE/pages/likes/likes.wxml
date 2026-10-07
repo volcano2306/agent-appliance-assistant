@@ -1,0 +1,47 @@
+<view class="page">
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar">
+      <view class="nav-back" bindtap="onBackTap">
+        <text class="nav-back-text">></text>
+      </view>
+      <text class="nav-title">收到的赞</text>
+    </view>
+  </view>
+
+  <view style="height: {{navHeight}}px"></view>
+
+  <scroll-view scroll-y class="main-scroll" style="height: {{scrollHeight}}px">
+    <view class="notify-list" wx:if="{{likes.length > 0}}">
+      <view class="notify-item" wx:for="{{likes}}" wx:key="id">
+        <view class="notify-main">
+          <view class="notify-avatar">
+            <image wx:if="{{item.fromAvatar}}" src="{{item.fromAvatar}}" class="avatar-img" mode="aspectFill"></image>
+            <view wx:else class="avatar-placeholder"></view>
+          </view>
+          <view class="notify-info">
+            <text class="notify-name">{{item.fromName}}</text>
+            <view class="notify-action-row">
+              <text class="notify-action">{{item.action}}</text>
+              <text class="notify-time">{{item.timeDisplay}}</text>
+            </view>
+          </view>
+          <view class="notify-thumb">
+            <image wx:if="{{item.thumbnail}}" src="{{item.thumbnail}}" class="thumb-img" mode="aspectFill"></image>
+            <view wx:else class="thumb-empty">
+              <text class="thumb-empty-text">图</text>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{item.content}}" class="notify-quote">
+          <text class="notify-quote-text">{{item.content}}</text>
+        </view>
+        <view class="notify-divider"></view>
+      </view>
+    </view>
+
+    <view wx:else class="empty-state">
+      <text class="empty-text">暂无点赞通知</text>
+    </view>
+    <view style="height: 40rpx;"></view>
+  </scroll-view>
+</view>

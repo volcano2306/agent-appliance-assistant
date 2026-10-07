@@ -1,0 +1,232 @@
+<view class="page">
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar">
+      <view class="nav-back" bindtap="onBackTap">
+        <text class="nav-back-text">‹</text>
+      </view>
+      <text class="nav-title">万万</text>
+    </view>
+  </view>
+
+  <view style="height: {{navHeight}}px"></view>
+
+  <view class="session-bar page-shell {{pageReady ? 'page-shell-ready' : ''}}" style="top: {{navHeight}}px; height: {{sessionBarHeight}}px; transition-delay: 40ms;">
+    <view class="session-bar-inner">
+      <view class="session-bar-left">
+        <text class="session-bar-title">会话工具</text>
+        <text wx:if="{{!appSettings.historyEnabled}}" class="session-bar-subtitle">聊天历史已关闭</text>
+        <text wx:elif="{{currentConversationId}}" class="session-bar-subtitle">已载入历史会话</text>
+      </view>
+      <view class="session-bar-actions">
+        <view class="session-action-btn pressable-surface {{!appSettings.historyEnabled ? 'session-action-disabled' : ''}}" bindtap="onHistoryTap">历史</view>
+        <view class="session-action-btn session-action-primary pressable-surface" bindtap="onClearChatTap">新对话</view>
+      </view>
+    </view>
+  </view>
+
+  <view style="height: {{sessionBarHeight}}px"></view>
+
+  <view wx:if="{{historyVisible}}" class="history-mask" bindtap="onHistoryClose">
+    <view class="history-panel" catchtap="onHistoryPanelTap">
+      <view class="history-head">
+        <view class="history-head-copy">
+          <text class="history-title">聊天历史</text>
+          <text class="history-subtitle">按最近对话排序，带说明书标签</text>
+        </view>
+      </view>
+
+      <view wx:if="{{historyLoading}}" class="history-loading">
+        <text class="history-loading-text">加载中...</text>
+      </view>
+
+      <scroll-view wx:elif="{{conversationList.length > 0}}" scroll-y class="history-scroll">
+        <view
+          wx:for="{{conversationList}}"
+          wx:key="id"
+          class="history-item {{currentConversationId == item.id ? 'history-item-active' : ''}}"
+          bindtap="onConversationTap"
+          data-id="{{item.id}}"
+          style="animation-delay: {{70 + index * 36}}ms;"
+        >
+          <view class="history-item-head">
+            <view class="history-item-title-wrap">
+              <text class="history-item-title">{{item.title}}</text>
+              <text class="history-item-time">{{item.updatedAtText}}</text>
+            </view>
+            <view
+              class="history-item-manage"
+              catchtap="onConversationManageTap"
+              data-id="{{item.id}}"
+              data-title="{{item.title}}"
+            >
+              <text class="history-item-manage-text">···</text>
+            </view>
+          </view>
+          <view wx:if="{{item.tags && item.tags.length}}" class="history-item-tags">
+            <text
+              wx:for="{{item.tags}}"
+              wx:key="key"
+              wx:for-item="tag"
+              class="history-tag history-tag-{{tag.tone}}"
+            >
+              {{tag.label}}
+            </text>
+          </view>
+          <text class="history-item-preview">{{item.preview}}</text>
+        </view>
+      </scroll-view>
+
+      <view wx:else class="history-empty">
+        <view class="history-empty-illustration">
+          <text class="history-empty-illustration-text">AI</text>
+        </view>
+        <text class="history-empty-title">还没有聊天历史</text>
+        <text class="history-empty-text">从说明书详情页进入 AI 提问后，会自动按最近会话保存</text>
+        <view class="history-empty-action pressable-surface" bindtap="onHistoryEmptyAction">去开始一段对话</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{renameVisible}}" class="rename-mask" bindtap="onRenameCancel">
+    <view class="rename-dialog" catchtap="onRenameDialogTap">
+      <text class="rename-title">重命名会话</text>
+      <text class="rename-subtitle">建议用问题主题或设备名称，方便后续查找</text>
+      <input
+        class="rename-input"
+        type="text"
+        maxlength="24"
+        placeholder="请输入会话名称"
+        focus
+        value="{{renameValue}}"
+        bindinput="onRenameInput"
+      />
+      <view class="rename-actions">
+        <view class="rename-btn rename-btn-secondary" bindtap="onRenameCancel">取消</view>
+        <view class="rename-btn rename-btn-primary" bindtap="onRenameConfirm">
+          {{renameSaving ? '保存中...' : '保存'}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view
+    scroll-y
+    class="chat-scroll page-shell {{pageReady ? 'page-shell-ready' : ''}}"
+    style="height: {{chatHeight}}px; transition-delay: 90ms;"
+    scroll-with-animation
+    scroll-into-view="{{scrollIntoView}}"
+  >
+    <view class="chat-list">
+      <view wx:for="{{messages}}" wx:key="id" id="msg-{{item.id}}" class="msg-row {{item.role === 'user' ? 'user-row' : 'ai-row'}}">
+        <block wx:if="{{item.role === 'ai'}}">
+          <view class="ai-avatar">
+            <image src="/images/assistant_logo.png" class="ai-avatar-logo" mode="aspectFit"></image>
+          </view>
+          <view class="msg-bubble ai-bubble">
+            <view wx:if="{{item.structuredAnswer}}" class="answer-structured">
+              <view wx:if="{{item.structuredAnswer.summary}}" class="answer-section">
+                <text class="answer-summary">{{item.structuredAnswer.summary}}</text>
+              </view>
+
+              <view wx:if="{{item.structuredAnswer.steps && item.structuredAnswer.steps.length}}" class="answer-section">
+                <text class="answer-section-label">操作步骤</text>
+                <view
+                  wx:for="{{item.structuredAnswer.steps}}"
+                  wx:key="index"
+                  wx:for-item="step"
+                  class="answer-list-item"
+                >
+                  <text class="answer-list-index">{{index + 1}}</text>
+                  <text class="answer-list-text">{{step}}</text>
+                </view>
+              </view>
+
+            </view>
+
+            <text wx:elif="{{item.text}}" class="msg-text ai-text">{{item.text}}</text>
+            <view wx:if="{{item.manualRef}}" class="manual-ref in-msg-ref">
+              <text class="manual-ref-name">{{item.manualRef.name}}</text>
+              <text class="manual-ref-tag">引用中</text>
+            </view>
+            <view wx:if="{{appSettings.showSources && item.sources && item.sources.length}}" class="source-list">
+              <view class="source-list-head">
+                <text class="source-list-title">回答依据</text>
+                <text class="source-list-count">{{item.sources.length}} 段</text>
+              </view>
+              <view
+                wx:for="{{item.sources}}"
+                wx:key="fragmentId"
+                wx:for-item="source"
+                class="source-card pressable-surface"
+                bindtap="onSourceTap"
+                data-kind="{{source.kind}}"
+                data-url="{{source.url}}"
+                data-page="{{source.page}}"
+                data-ref-id="{{item.manualRef ? item.manualRef.id : ''}}"
+                data-manual-id="{{item.manualRef ? item.manualRef.manualId : ''}}"
+                data-manual-type="{{item.manualRef ? item.manualRef.type : ''}}"
+              >
+                <text class="source-page">{{source.pageLabel}}</text>
+                <text wx:if="{{source.title}}" class="source-snippet">{{source.title}}</text>
+                <text wx:if="{{source.snippet}}" class="source-snippet">{{source.snippet}}</text>
+                <text class="source-jump">{{source.kind === 'web_result' ? '复制链接' : '查看原文'}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+
+        <block wx:else>
+          <view class="msg-bubble user-bubble">
+            <text wx:if="{{item.text}}" class="msg-text user-text">{{item.text}}</text>
+            <image wx:if="{{item.image}}" class="preview-img" src="{{item.image}}" mode="aspectFill" bindtap="onPreviewImage" data-url="{{item.image}}" lazy-load="true"></image>
+            <view wx:if="{{item.manualRef}}" class="manual-ref user-msg-ref">
+              <text class="manual-ref-name">{{item.manualRef.name}}</text>
+              <text class="manual-ref-tag">引用中</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="input-wrap page-shell {{pageReady ? 'page-shell-ready' : ''}}" style="padding-bottom: {{safeAreaBottom}}px; min-height: {{inputAreaHeight}}rpx; transition-delay: 140ms;">
+    <view wx:if="{{selectedManual}}" class="selected-manual-row">
+      <view class="manual-ref selected-ref">
+        <text class="manual-ref-name">{{selectedManual.name}}</text>
+        <text class="manual-ref-tag">引用中</text>
+      </view>
+      <view class="remove-ref" bindtap="onRemoveManualRef">×</view>
+    </view>
+
+    <view wx:if="{{pendingImage}}" class="selected-manual-row">
+      <view class="manual-ref selected-ref">
+        <text class="manual-ref-name">图片预览已添加</text>
+        <text class="manual-ref-tag">待发送</text>
+      </view>
+      <view class="remove-ref" bindtap="onRemovePendingImage">×</view>
+    </view>
+
+    <view wx:if="{{voiceStatusText}}" class="voice-status-row">
+      <view class="voice-status-dot {{recording ? 'voice-status-dot-recording' : ''}}"></view>
+      <text class="voice-status-text">{{voiceStatusText}}</text>
+    </view>
+
+    <view class="input-row">
+      <view class="upload-btn pressable-surface" bindtap="onUploadTap">
+        <image src="/images/home/MCPNG/camera_line.png" class="upload-icon" mode="aspectFit"></image>
+      </view>
+      <view class="voice-btn pressable-surface {{recording ? 'voice-btn-recording' : ''}} {{transcribing ? 'voice-btn-disabled' : ''}}" bindtap="onVoiceTap">
+        {{recording ? '停止' : (transcribing ? '识别' : '语音')}}
+      </view>
+      <textarea
+        class="chat-input"
+        maxlength="-1"
+        auto-height
+        placeholder="请输入问题..."
+        value="{{inputText}}"
+        bindinput="onInputChange"
+      ></textarea>
+      <view class="send-btn pressable-surface" bindtap="onSendTap">发送</view>
+    </view>
+  </view>
+</view>

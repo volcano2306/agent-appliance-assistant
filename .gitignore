@@ -1,0 +1,45 @@
+# Secrets and local settings
+.env
+.env.*
+!.env.example
+application-local.properties
+application-local.yml
+compose.local.yml
+project.private.config.json
+FE/project.local.config.json
+*.pem
+*.key
+*.p12
+*.pfx
+# Logs, caches, compiled files and environments
+*.log
+hs_err_pid*
+replay_pid*
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv*/
+venv/
+node_modules/
+.npm-cache/
+miniprogram_npm/
+target/
+*.class
+*.jar
+# User data and generated evaluation output
+uploads/
+storage/
+reports/
+eval-results/
+data/**
+!data/README.md
+!data/demo-manuals.json
+# Editor and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp

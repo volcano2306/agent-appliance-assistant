@@ -1,0 +1,57 @@
+services:
+  mongodb:
+    image: mongo:7
+    ports: ["127.0.0.1:27017:27017"]
+    volumes: ["mongo_data:/data/db"]
+  qdrant:
+    image: qdrant/qdrant:v1.15.1
+    ports: ["127.0.0.1:6333:6333", "127.0.0.1:6334:6334"]
+    volumes: ["qdrant_data:/qdrant/storage"]
+  agent:
+    build: ./agent
+    ports: ["127.0.0.1:8001:8001"]
+    depends_on: [mongodb, qdrant]
+    environment:
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL:-https://windhub.cc/v1}
+      DEEPSEEK_MODEL: ${DEEPSEEK_MODEL:-qwen3.8-flash-next}
+      MODEL_EXTRA_BODY: ${MODEL_EXTRA_BODY:-{}}
+      AGENT_INTERNAL_TOKEN: ${AGENT_INTERNAL_TOKEN:?Set AGENT_INTERNAL_TOKEN in your local .env}
+      JAVA_BASE_URL: http://backend:18083
+      MONGODB_URI: mongodb://mongodb:27017/jiadian
+      MONGODB_DATABASE: jiadian
+      QDRANT_URL: http://qdrant:6333
+      SERPAPI_API_KEY: ${SERPAPI_API_KEY:-}
+      TENCENT_ASR_APP_ID: ${TENCENT_ASR_APP_ID:-}
+      TENCENT_ASR_SECRET_ID: ${TENCENT_ASR_SECRET_ID:-}
+      TENCENT_ASR_SECRET_KEY: ${TENCENT_ASR_SECRET_KEY:-}
+      MEMORY_ENABLED: ${MEMORY_ENABLED:-false}
+      MEMORY_EXECUTION_ENABLED: ${MEMORY_EXECUTION_ENABLED:-false}
+      MEMORY_TRIGGER_TOKENS: ${MEMORY_TRIGGER_TOKENS:-1500}
+      MEMORY_MIN_GROWTH_TOKENS: ${MEMORY_MIN_GROWTH_TOKENS:-500}
+      MEMORY_RECENT_TURNS: ${MEMORY_RECENT_TURNS:-5}
+      MEMORY_SUMMARY_MAX_TOKENS: ${MEMORY_SUMMARY_MAX_TOKENS:-600}
+  backend:
+    build: ./BE
+    ports: ["127.0.0.1:18083:18083"]
+    depends_on: [mongodb, agent]
+    volumes: ["./data:/data:ro", "uploads:/uploads"]
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/jiadian
+      APP_DATA_ROOT: /data
+      APP_UPLOAD_DIR: /uploads
+      NEWAPI_API_KEY: ${DEEPSEEK_API_KEY:-}
+      NEWAPI_BASE_URL: ${DEEPSEEK_BASE_URL:-https://windhub.cc/v1}
+      NEWAPI_MODEL: ${DEEPSEEK_MODEL:-qwen3.8-flash-next}
+      AGENT_PYTHON_BASE_URL: http://agent:8001
+      AGENT_INTERNAL_TOKEN: ${AGENT_INTERNAL_TOKEN:?Set AGENT_INTERNAL_TOKEN in your local .env}
+      AI_MEMORY_ENABLED: ${MEMORY_ENABLED:-false}
+      AI_MEMORY_EXECUTION_ENABLED: ${MEMORY_EXECUTION_ENABLED:-false}
+      AI_MEMORY_TRIGGER_TOKENS: ${MEMORY_TRIGGER_TOKENS:-1500}
+      AI_MEMORY_MIN_GROWTH_TOKENS: ${MEMORY_MIN_GROWTH_TOKENS:-500}
+      AI_MEMORY_RECENT_TURNS: ${MEMORY_RECENT_TURNS:-5}
+      AI_MEMORY_SUMMARY_MAX_TOKENS: ${MEMORY_SUMMARY_MAX_TOKENS:-600}
+volumes:
+  mongo_data:
+  qdrant_data:
+  uploads:

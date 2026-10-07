@@ -1,0 +1,149 @@
+<view class="page">
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar">
+      <view class="nav-ai-btn" bindtap="onQuarterTap"></view>
+      <view class="nav-search" bindtap="onSearchTap">
+        <image src="/images/home/MCPNG/search_3_line.png" class="nav-icon-img" mode="aspectFit"></image>
+      </view>
+      <text class="nav-title">家电轻手册</text>
+    </view>
+  </view>
+
+  <view style="height: {{navHeight}}px"></view>
+
+  <scroll-view scroll-y class="main-scroll" style="height: {{scrollHeight}}px">
+    <view class="user-section">
+      <block wx:if="{{!isLoggedIn}}">
+        <text class="welcome-text">欢迎使用</text>
+        <view class="login-btn" bindtap="onLoginTap">
+          <text class="login-btn-text">点击登录</text>
+        </view>
+      </block>
+
+      <block wx:else>
+        <view class="profile-card">
+          <view class="avatar-area">
+            <view class="avatar-circle">
+              <view class="avatar-media">
+                <image wx:if="{{avatarUrl}}" src="{{avatarUrl}}" class="avatar-img" mode="aspectFill"></image>
+                <view wx:else class="avatar-placeholder"></view>
+              </view>
+              <view class="avatar-camera-badge" bindtap="onAvatarCameraTap">
+                <image src="/images/home/MCPNG/camera_line.png" class="badge-icon" mode="aspectFit"></image>
+              </view>
+            </view>
+          </view>
+
+          <text class="join-days-center">加入第 {{joinDays}} 天</text>
+
+          <view class="info-list">
+            <view class="info-item" bindtap="onNicknameTap">
+              <text class="info-label">昵称</text>
+              <text class="info-value">{{nickname}}</text>
+              <text class="info-arrow">></text>
+            </view>
+            <view class="info-item" bindtap="onPhoneTap">
+              <text class="info-label">手机</text>
+              <text class="info-value">{{phone}}</text>
+              <text class="info-arrow">></text>
+            </view>
+            <view class="info-item" bindtap="onSettingsTap">
+              <text class="info-label">设置</text>
+              <text class="info-value"></text>
+              <text class="info-arrow">></text>
+            </view>
+            <view class="info-item" bindtap="onDeactivateTap">
+              <text class="info-label">注销账号</text>
+              <text class="info-value"></text>
+              <text class="info-arrow">></text>
+            </view>
+          </view>
+
+          <view class="logout-btn" bindtap="onLogoutTap">
+            <text class="logout-text">退出登录</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <view class="popup-overlay" hidden="{{!showNicknamePopup}}">
+    <view class="popup-mask" bindtap="onOverlayTap"></view>
+    <view class="popup-box" catchtap="noPropagation">
+      <view class="popup-header">
+        <text class="popup-title">修改昵称</text>
+        <view class="popup-close" bindtap="onClosePopup">
+          <text class="popup-close-text">×</text>
+        </view>
+      </view>
+      <input
+        class="popup-input"
+        value="{{editNickname}}"
+        bindinput="onNicknameInput"
+        placeholder="请输入新昵称"
+        placeholder-class="popup-placeholder"
+        maxlength="20"
+        adjust-position="{{true}}"
+      />
+      <view class="popup-footer">
+        <view class="popup-btn cancel-btn" bindtap="onClosePopup">
+          <text class="popup-btn-text">取消</text>
+        </view>
+        <view class="popup-btn confirm-btn" bindtap="onNicknameConfirm">
+          <text class="popup-btn-text">确认</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="popup-overlay" hidden="{{!showPhonePopup}}">
+    <view class="popup-mask" bindtap="onOverlayTap"></view>
+    <view class="popup-box" catchtap="noPropagation">
+      <view class="popup-header">
+        <text class="popup-title">修改手机</text>
+        <view class="popup-close" bindtap="onClosePopup">
+          <text class="popup-close-text">×</text>
+        </view>
+      </view>
+      <input
+        class="popup-input"
+        value="{{editPhone}}"
+        bindinput="onPhoneInput"
+        placeholder="请输入手机号"
+        placeholder-class="popup-placeholder"
+        type="number"
+        maxlength="11"
+        adjust-position="{{true}}"
+      />
+      <view class="popup-footer">
+        <view class="popup-btn cancel-btn" bindtap="onClosePopup">
+          <text class="popup-btn-text">取消</text>
+        </view>
+        <view class="popup-btn confirm-btn" bindtap="onPhoneConfirm">
+          <text class="popup-btn-text">确认</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="popup-overlay" hidden="{{!showDeactivatePopup}}">
+    <view class="popup-mask" bindtap="onOverlayTap"></view>
+    <view class="popup-box" catchtap="noPropagation">
+      <view class="popup-header">
+        <text class="popup-title">注销账号</text>
+        <view class="popup-close" bindtap="onClosePopup">
+          <text class="popup-close-text">×</text>
+        </view>
+      </view>
+      <text class="popup-desc">注销后账号数据将无法恢复，确认继续吗？</text>
+      <view class="popup-footer">
+        <view class="popup-btn cancel-btn" bindtap="onClosePopup">
+          <text class="popup-btn-text">取消</text>
+        </view>
+        <view class="popup-btn danger-btn" bindtap="onDeactivateConfirm">
+          <text class="popup-btn-text">确认注销</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

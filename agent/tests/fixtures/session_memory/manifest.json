@@ -1,0 +1,44 @@
+{
+  "version": "memory-eval-v2-offline",
+  "protocol": "fixed-history-replay-with-independent-probes",
+  "promptFreeze": "session-memory-v1",
+  "ragTopK": 10,
+  "repeats": 3,
+  "arms": [
+    {"id": "B6", "mode": "messages", "messages": 6},
+    {"id": "FULL", "mode": "full"},
+    {"id": "N3-S300", "mode": "summary", "recentTurns": 3, "summaryMaxTokens": 300},
+    {"id": "N3-S600", "mode": "summary", "recentTurns": 3, "summaryMaxTokens": 600},
+    {"id": "N3-S1000", "mode": "summary", "recentTurns": 3, "summaryMaxTokens": 1000},
+    {"id": "N5-S300", "mode": "summary", "recentTurns": 5, "summaryMaxTokens": 300},
+    {"id": "N5-S600", "mode": "summary", "recentTurns": 5, "summaryMaxTokens": 600},
+    {"id": "N5-S1000", "mode": "summary", "recentTurns": 5, "summaryMaxTokens": 1000}
+  ],
+  "gates": {
+    "criticalRetention": 1.0, "criticalAnswerAccuracy": 1.0,
+    "generalRetention": 0.95, "generalAnswerAccuracy": 0.95,
+    "correctionAdoption": 0.95, "cancellationAdoption": 0.95, "recentDetailAccuracy": 0.95,
+    "unsupportedFactRateMax": 0.01,
+    "crossSessionLeakageMax": 0, "falseWriteClaimsMax": 0,
+    "committedSchemaRate": 1.0, "committedSizeRate": 1.0,
+    "summaryOperationSuccess": 0.95, "answerDropVsFullMax": 0.02
+  },
+  "selection": {"primary": "actual_total_cost", "costTieWithin": 0.05, "secondary": "end_to_end_p95"},
+  "budgets": {"maxCalls": 1000, "maxTotalTokens": 2000000, "maxDurationSeconds": 3600},
+  "tracks": ["pure-memory", "integration"],
+  "prices": {"inputPerMillion": null, "cachedInputPerMillion": null, "outputPerMillion": null, "currency": "unconfigured"},
+  "trajectories": [
+    {"id": "dev-model-correction", "split": "dev", "turns": 24, "density": 4, "theme": "洗衣机型号修正", "model": "W-A01", "newModel": "W-A02", "budget": "1800", "newBudget": "2300"},
+    {"id": "dev-budget-correction", "split": "dev", "turns": 28, "density": 8, "theme": "烤箱预算修正", "model": "O-B01", "newModel": "O-B02", "budget": "900", "newBudget": "1200"},
+    {"id": "dev-cancel-write", "split": "dev", "turns": 32, "density": 4, "theme": "取消报修", "model": "D-C01", "newModel": "D-C02", "budget": "2000", "newBudget": "2500"},
+    {"id": "dev-advice-not-done", "split": "dev", "turns": 36, "density": 8, "theme": "建议不等于执行", "model": "J-D01", "newModel": "J-D02", "budget": "600", "newBudget": "800"},
+    {"id": "dev-unknown-outcome", "split": "dev", "turns": 40, "density": 16, "theme": "写后状态未知", "model": "P-E01", "newModel": "P-E02", "budget": "1500", "newBudget": "1700"},
+    {"id": "dev-reference-pending", "split": "dev", "turns": 24, "density": 8, "theme": "引用与未决问题", "model": "S-F01", "newModel": "S-F02", "budget": "1000", "newBudget": "1400"},
+    {"id": "heldout-juice", "split": "heldout", "turns": 24, "density": 4, "theme": "榨汁机限制", "model": "J-G11", "newModel": "J-G12", "budget": "700", "newBudget": "950"},
+    {"id": "heldout-garden", "split": "heldout", "turns": 28, "density": 8, "theme": "园艺工具型号", "model": "G-H11", "newModel": "G-H12", "budget": "1100", "newBudget": "1600"},
+    {"id": "heldout-printer", "split": "heldout", "turns": 32, "density": 16, "theme": "打印机未决事项", "model": "P-I11", "newModel": "P-I12", "budget": "1300", "newBudget": "1800"},
+    {"id": "heldout-pump", "split": "heldout", "turns": 36, "density": 8, "theme": "水泵安全边界", "model": "B-J11", "newModel": "B-J12", "budget": "2100", "newBudget": "2800"},
+    {"id": "heldout-scanner", "split": "heldout", "turns": 40, "density": 4, "theme": "扫描仪预算", "model": "S-K11", "newModel": "S-K12", "budget": "1200", "newBudget": "1900"},
+    {"id": "heldout-stress", "split": "heldout", "turns": 80, "density": 16, "theme": "多次摘要压力", "model": "W-L11", "newModel": "W-L12", "budget": "2200", "newBudget": "2900"}
+  ]
+}

@@ -1,0 +1,144 @@
+page {
+  background: #f3f6f4;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.header {
+  margin-bottom: 22rpx;
+}
+
+.header-title {
+  display: block;
+  font-size: 42rpx;
+  font-weight: 700;
+  color: #1e5a4a;
+}
+
+.header-subtitle {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #6d8579;
+}
+
+.loading,
+.empty {
+  margin-top: 120rpx;
+  text-align: center;
+  color: #718c7f;
+  font-size: 28rpx;
+}
+
+.empty-title {
+  display: block;
+  font-size: 34rpx;
+  color: #2c5f50;
+  font-weight: 700;
+}
+
+.empty-desc {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #799286;
+}
+
+.empty-btn {
+  width: 260rpx;
+  margin: 26rpx auto 0;
+  height: 70rpx;
+  border-radius: 999rpx;
+  background: #1f5e4d;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+}
+
+.order-scroll {
+  height: calc(100vh - 190rpx);
+}
+
+.order-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 22rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 6rpx 18rpx rgba(17, 55, 43, 0.08);
+}
+
+.order-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.device-name {
+  font-size: 32rpx;
+  color: #1f5a4a;
+  font-weight: 700;
+}
+
+.status-tag {
+  font-size: 22rpx;
+  padding: 6rpx 14rpx;
+  border-radius: 10rpx;
+}
+
+.status-pending {
+  color: #8a6a08;
+  background: #f7df88;
+}
+
+.status-processing {
+  color: #0f5b7d;
+  background: #bde4f6;
+}
+
+.status-done {
+  color: #1e6f3a;
+  background: #caefc9;
+}
+
+.status-canceled {
+  color: #6d6d6d;
+  background: #e6e6e6;
+}
+
+.issue-desc {
+  display: block;
+  margin-top: 12rpx;
+  color: #52675e;
+  font-size: 26rpx;
+  line-height: 1.5;
+}
+
+.order-bottom {
+  margin-top: 18rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-text {
+  color: #879a91;
+  font-size: 22rpx;
+}
+
+.cancel-btn {
+  min-width: 90rpx;
+  height: 50rpx;
+  border-radius: 10rpx;
+  border: 1rpx solid #d4ddd8;
+  color: #456257;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

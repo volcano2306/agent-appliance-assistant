@@ -1,0 +1,69 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/camera/camera",
+    "pages/manual-detail/manual-detail",
+    "pages/ai/ai",
+    "pages/appliance/appliance",
+    "pages/toolbox/toolbox",
+    "pages/message/message",
+    "pages/profile/profile",
+    "pages/settings/settings",
+    "pages/userinfo/userinfo",
+    "pages/publish/publish",
+    "pages/service-orders/service-orders",
+    "pages/search/search",
+    "pages/msgchat/msgchat",
+    "pages/likes/likes",
+    "pages/comments/comments"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "家电轻手册",
+    "navigationBarBackgroundColor": "#205D4C",
+    "backgroundColor": "#205D4C"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#6B906F",
+    "selectedColor": "#205D4C",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab_discover.png",
+        "selectedIconPath": "images/tab_discover_active.png"
+      },
+      {
+        "pagePath": "pages/toolbox/toolbox",
+        "text": "工具箱",
+        "iconPath": "images/tab_ai.png",
+        "selectedIconPath": "images/tab_ai_active.png"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "消息",
+        "iconPath": "images/tab_appliance.png",
+        "selectedIconPath": "images/tab_appliance_active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我",
+        "iconPath": "images/tab_profile.png",
+        "selectedIconPath": "images/tab_profile_active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "permission": {
+    "scope.record": {
+      "desc": "用于将语音问题转换为文字并发送给智能家电助手"
+    }
+  },
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

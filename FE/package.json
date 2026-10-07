@@ -1,0 +1,15 @@
+{
+  "name": "weixinxiaochengxu",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "node --test tests/ai-conversation-isolation.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "mingcute_icon": "^2.9.71"
+  }
+}

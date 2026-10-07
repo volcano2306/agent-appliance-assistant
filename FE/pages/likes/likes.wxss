@@ -1,0 +1,200 @@
+/* ============================
+   基础页面
+   ============================ */
+.page {
+  min-height: 100vh;
+  background-color: #205D4C;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================
+   自定义导航栏
+   ============================ */
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #205D4C;
+  z-index: 100;
+}
+
+.nav-bar {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 32rpx;
+  position: relative;
+}
+
+.nav-back {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-back-text {
+  font-size: 52rpx;
+  color: #fff;
+  line-height: 1;
+  font-weight: 300;
+  transform: rotate(180deg);
+}
+
+.nav-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #fff;
+  pointer-events: none;
+}
+
+/* ============================
+   主滚动区
+   ============================ */
+.main-scroll {
+  flex: 1;
+}
+
+/* ============================
+   通知列表
+   ============================ */
+.notify-list {
+  padding: 0 32rpx;
+}
+
+.notify-item {
+  padding-top: 32rpx;
+}
+
+/* 主行：头像 + 信息 + 缩略图 */
+.notify-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 20rpx;
+}
+
+/* ============================
+   头像
+   ============================ */
+.notify-avatar {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+}
+
+/* ============================
+   用户信息区
+   ============================ */
+.notify-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.notify-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #fff;
+}
+
+.notify-action-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
+.notify-action {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.notify-time {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ============================
+   缩略图
+   ============================ */
+.notify-thumb {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.thumb-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.thumb-empty {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumb-empty-text {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================
+   引用内容
+   ============================ */
+.notify-quote {
+  margin-top: 18rpx;
+  margin-left: 108rpx;
+  padding: 14rpx 20rpx;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-left: 4rpx solid rgba(255, 255, 255, 0.35);
+  border-radius: 0 10rpx 10rpx 0;
+}
+
+.notify-quote-text {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+}
+
+/* ============================
+   分割线
+   ============================ */
+.notify-divider {
+  margin-top: 28rpx;
+  height: 1rpx;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.empty-state { padding: 140rpx 0; text-align: center; }
+.empty-text { font-size: 28rpx; color: rgba(255,255,255,0.55); }

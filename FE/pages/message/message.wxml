@@ -1,0 +1,66 @@
+<view class="page">
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar">
+      <view class="nav-clear-btn" bindtap="onClearTap">
+        <text class="nav-clear-text">全部已读</text>
+      </view>
+      <text class="nav-title">消息</text>
+    </view>
+  </view>
+
+  <view style="height: {{navHeight}}px"></view>
+
+  <scroll-view scroll-y class="main-scroll" style="height: {{scrollHeight}}px">
+    <view class="quick-nav">
+      <view class="quick-item" bindtap="onQuickTap" data-type="likes">
+        <view class="quick-icon-wrap">
+          <image src="/images/message/MCPNG/finger_love_line.png" class="quick-icon" mode="aspectFit"></image>
+          <view wx:if="{{likesUnread > 0}}" class="quick-badge">
+            <text class="quick-badge-text">{{likesUnread > 99 ? '99+' : likesUnread}}</text>
+          </view>
+        </view>
+        <text class="quick-label">赞</text>
+      </view>
+      <view class="quick-item" bindtap="onQuickTap" data-type="comments">
+        <view class="quick-icon-wrap">
+          <image src="/images/message/MCPNG/comment_line.png" class="quick-icon" mode="aspectFit"></image>
+          <view wx:if="{{commentsUnread > 0}}" class="quick-badge">
+            <text class="quick-badge-text">{{commentsUnread > 99 ? '99+' : commentsUnread}}</text>
+          </view>
+        </view>
+        <text class="quick-label">评论</text>
+      </view>
+    </view>
+
+    <view class="msg-list">
+      <view
+        class="msg-item"
+        wx:for="{{messages}}"
+        wx:key="id"
+        bindtap="onMsgTap"
+        data-id="{{item.id}}"
+        data-type="{{item.type}}"
+        data-title="{{item.title}}"
+        data-subtitle="{{item.subtitle}}"
+        data-icon="{{item.icon}}"
+        data-preview="{{item.preview}}"
+      >
+        <view class="msg-icon-wrap">
+          <view class="msg-icon-circle {{item.type === 'brand' ? 'msg-icon-circle-brand' : ''}}">
+            <image src="{{item.icon}}" class="msg-icon {{item.type === 'brand' ? 'msg-icon-brand' : 'msg-icon-system'}}" mode="aspectFit"></image>
+          </view>
+          <view wx:if="{{item.unread > 0}}" class="msg-badge {{item.muted ? 'msg-badge-dot' : ''}}">
+            <text wx:if="{{!item.muted}}" class="msg-badge-text">{{item.unread > 99 ? '99+' : item.unread}}</text>
+          </view>
+        </view>
+        <view class="msg-content">
+          <text class="msg-title">{{item.title}}</text>
+          <text class="msg-subtitle">{{item.subtitle}}</text>
+        </view>
+        <text class="msg-time">{{item.timeDisplay}}</text>
+      </view>
+    </view>
+
+    <view style="height: {{tabBarHeight}}px;"></view>
+  </scroll-view>
+</view>

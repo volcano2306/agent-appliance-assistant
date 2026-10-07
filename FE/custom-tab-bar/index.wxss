@@ -1,0 +1,100 @@
+.tab-bar-wrap {
+  position: relative;
+}
+
+/* 底部横条 — 更窄，80%透明度 */
+.tab-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 64rpx;
+  background: rgba(107, 144, 111, 0.8);
+  border-top: none;
+}
+
+/* Tab 项：仅文字 */
+.tab-item {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64rpx;
+}
+
+.tab-label {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.tab-item.active .tab-label {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.tab-badge {
+  position: absolute;
+  top: 6rpx;
+  right: 28rpx;
+  min-width: 30rpx;
+  height: 30rpx;
+  border-radius: 15rpx;
+  background: #e63c3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6rpx;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.tab-badge-text {
+  font-size: 18rpx;
+  line-height: 1;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* 中间占位 */
+.tab-center-placeholder {
+  width: 120rpx;
+  height: 64rpx;
+}
+
+/* + 圆形按钮外层 — 圆顶高于横条顶部半个半径(25rpx) */
+.center-btn-wrap {
+  position: absolute;
+  left: 50%;
+  top: -25rpx;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.center-btn {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: #205D4C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 16rpx rgba(32, 93, 76, 0.5);
+  border: 4rpx solid rgba(255, 255, 255, 0.25);
+}
+
+.center-plus {
+  font-size: 56rpx;
+  color: #ffffff;
+  line-height: 1;
+  font-weight: 300;
+  margin-top: -4rpx;
+}
+
+/* 安全区域 */
+.safe-area {
+  background: rgba(107, 144, 111, 0.8);
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}

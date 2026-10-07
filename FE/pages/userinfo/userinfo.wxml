@@ -1,0 +1,151 @@
+<view class="page">
+
+  <!-- 自定义导航栏 -->
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar">
+      <!-- 左：返回 -->
+      <view class="nav-back" bindtap="onBackTap">
+        <text class="nav-back-text">‹</text>
+      </view>
+      <!-- 中：标题 -->
+      <text class="nav-title">个人资料</text>
+    </view>
+  </view>
+
+  <!-- 导航栏占位 -->
+  <view style="height: {{navHeight}}px"></view>
+
+  <!-- 页面内容 -->
+  <view class="content">
+
+    <!-- 头像区 -->
+    <view class="avatar-area">
+      <!-- 头像主圆 -->
+      <view class="avatar-circle">
+        <image
+          wx:if="{{avatarUrl}}"
+          src="{{avatarUrl}}"
+          class="avatar-img"
+          mode="aspectFill"
+        ></image>
+        <view wx:else class="avatar-placeholder"></view>
+        <!-- 相机图标徽章（右下角） -->
+        <view class="avatar-camera-badge" bindtap="onAvatarCameraTap">
+          <image src="/images/home/MCPNG/camera_line.png" class="badge-icon" mode="aspectFit"></image>
+        </view>
+      </view>
+    </view>
+
+    <!-- 信息列表 -->
+    <view class="info-list">
+      <!-- 昵称 -->
+      <view class="info-item" bindtap="onNicknameTap">
+        <text class="info-label">昵称</text>
+        <text class="info-value">{{nickname}}</text>
+        <text class="info-arrow">›</text>
+      </view>
+      <!-- 手机 -->
+      <view class="info-item" bindtap="onPhoneTap">
+        <text class="info-label">手机</text>
+        <text class="info-value">{{phone}}</text>
+        <text class="info-arrow">›</text>
+      </view>
+      <!-- 注销账号 -->
+      <view class="info-item" bindtap="onDeactivateTap">
+        <text class="info-label">注销账号</text>
+        <text class="info-value"></text>
+        <text class="info-arrow">›</text>
+      </view>
+    </view>
+
+    <!-- 退出登录按钮 -->
+    <view class="logout-btn" bindtap="onLogoutTap">
+      <text class="logout-text">退出登录</text>
+    </view>
+
+  </view>
+
+  <!-- ========== 修改昵称弹窗 ========== -->
+  <view class="popup-overlay" hidden="{{!showNicknamePopup}}">
+    <view class="popup-box" catchtap="">
+      <view class="popup-header">
+        <text class="popup-title">修改昵称</text>
+        <view class="popup-close" bindtap="onClosePopup">
+          <text class="popup-close-text">×</text>
+        </view>
+      </view>
+      <input
+        class="popup-input"
+        value="{{editNickname}}"
+        bindinput="onNicknameInput"
+        placeholder="请输入新昵称"
+        placeholder-class="popup-placeholder"
+        maxlength="20"
+        adjust-position="{{false}}"
+      />
+      <view class="popup-footer">
+        <view class="popup-btn cancel-btn" bindtap="onClosePopup">
+          <text class="popup-btn-text">取消</text>
+        </view>
+        <view class="popup-btn confirm-btn" bindtap="onNicknameConfirm">
+          <text class="popup-btn-text">确认</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ========== 修改手机弹窗 ========== -->
+  <view class="popup-overlay" hidden="{{!showPhonePopup}}">
+    <view class="popup-box" catchtap="">
+      <view class="popup-header">
+        <text class="popup-title">修改手机</text>
+        <view class="popup-close" bindtap="onClosePopup">
+          <text class="popup-close-text">×</text>
+        </view>
+      </view>
+      <input
+        class="popup-input"
+        value="{{editPhone}}"
+        bindinput="onPhoneInput"
+        placeholder="请输入手机号"
+        placeholder-class="popup-placeholder"
+        type="number"
+        maxlength="11"
+        adjust-position="{{false}}"
+      />
+      <view class="popup-phone-auth">
+        <button class="phone-auth-btn" open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber">微信授权手机号</button>
+      </view>
+      <view class="popup-footer">
+        <view class="popup-btn cancel-btn" bindtap="onClosePopup">
+          <text class="popup-btn-text">取消</text>
+        </view>
+        <view class="popup-btn confirm-btn" bindtap="onPhoneConfirm">
+          <text class="popup-btn-text">确认</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ========== 注销账号确认弹窗 ========== -->
+  <view class="popup-overlay" hidden="{{!showDeactivatePopup}}">
+    <view class="popup-box" catchtap="">
+      <view class="popup-header">
+        <text class="popup-title">注销账号</text>
+        <view class="popup-close" bindtap="onClosePopup">
+          <text class="popup-close-text">×</text>
+        </view>
+      </view>
+      <text class="popup-desc">注销后账号数据将无法恢复，确认继续吗？</text>
+      <view class="popup-footer">
+        <view class="popup-btn cancel-btn" bindtap="onClosePopup">
+          <text class="popup-btn-text">取消</text>
+        </view>
+        <view class="popup-btn danger-btn" bindtap="onDeactivateConfirm">
+          <text class="popup-btn-text">确认注销</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

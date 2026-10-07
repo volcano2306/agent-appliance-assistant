@@ -1,0 +1,410 @@
+/* ========== 页面基础 ========== */
+page {
+  background: #205D4C;
+}
+
+.page {
+  min-height: 100vh;
+  background: #205D4C;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== 自定义导航栏 ========== */
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 32rpx;
+  position: relative;
+}
+
+.nav-ai-btn {
+  width: 64rpx;
+  height: 64rpx;
+  background: #E9AE0E;
+  border-radius: 20rpx 8rpx 20rpx 8rpx;
+  flex-shrink: 0;
+}
+
+.nav-search {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12rpx;
+  flex-shrink: 0;
+}
+
+.nav-icon-img {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.nav-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #ffffff;
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ========== 可滚动区域 ========== */
+.main-scroll {
+  background: #205D4C;
+}
+
+/* ========== 用户信息区 ========== */
+.user-section {
+  padding: 40rpx 40rpx 32rpx;
+}
+
+.welcome-text {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 24rpx;
+}
+
+.login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12rpx 32rpx;
+  background: #E9AE0E;
+  border-radius: 12rpx;
+}
+
+.login-btn-text {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* 已登录 */
+.user-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.user-name {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.user-arrow {
+  font-size: 40rpx;
+  color: #ffffff;
+}
+
+.join-days {
+  font-size: 26rpx;
+  color: #9B9DA9;
+  display: block;
+  margin-top: 12rpx;
+}
+
+/* ========== 菜单列表 ========== */
+.menu-list {
+  padding: 0 40rpx;
+}
+
+.menu-item {
+  padding: 30rpx 0;
+}
+
+.menu-label {
+  font-size: 32rpx;
+  color: #ffffff;
+}
+
+/* ========== 分割线 ========== */
+.divider {
+  margin: 16rpx 40rpx;
+  height: 1rpx;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ========== 底部 Tab ========== */
+.bottom-tabs {
+  display: flex;
+  padding: 0 40rpx;
+  gap: 48rpx;
+}
+
+.bottom-tab {
+  padding: 20rpx 0;
+}
+
+.bottom-tab-text {
+  font-size: 28rpx;
+  color: #ffffff;
+}
+
+.bottom-tab.active .bottom-tab-text {
+  font-weight: bold;
+}
+
+/* ========== Tab 内容区 ========== */
+.tab-content {
+  padding: 60rpx 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-empty {
+  font-size: 26rpx;
+  color: #9B9DA9;
+}
+
+/* ========== 登录卡片区 ========== */
+.profile-card {
+  padding: 36rpx 32rpx 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28rpx;
+}
+
+.avatar-area {
+  width: 200rpx;
+  height: 200rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-circle {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  overflow: visible;
+}
+
+.avatar-media {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.avatar-img,
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+}
+
+.avatar-camera-badge {
+  position: absolute;
+  right: -6rpx;
+  bottom: -6rpx;
+  width: 54rpx;
+  height: 54rpx;
+  border-radius: 50%;
+  background: #E9AE0E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3rpx solid #205D4C;
+}
+
+.badge-icon {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.join-days-center {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.info-list {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 28rpx;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 30rpx;
+  color: #ffffff;
+  font-weight: 500;
+  width: 128rpx;
+  flex-shrink: 0;
+}
+
+.info-value {
+  flex: 1;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.info-arrow {
+  font-size: 40rpx;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 24rpx 0;
+  border: 2rpx solid #E9AE0E;
+  border-radius: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-text {
+  font-size: 30rpx;
+  color: #E9AE0E;
+  font-weight: 500;
+}
+
+/* ========== 弹窗遮罩 ========== */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-overlay[hidden] {
+  display: none !important;
+}
+
+.popup-mask {
+  position: absolute;
+  inset: 0;
+}
+
+/* ========== 弹窗主体 ========== */
+.popup-box {
+  position: relative;
+  width: 620rpx;
+  background: #1e5040;
+  border-radius: 24rpx;
+  overflow: hidden;
+  border: 1rpx solid rgba(255, 255, 255, 0.15);
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36rpx 36rpx 24rpx;
+}
+
+.popup-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.popup-close {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-close-text {
+  font-size: 40rpx;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1;
+}
+
+.popup-input {
+  margin: 0 36rpx 32rpx;
+  padding: 18rpx 24rpx;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  color: #ffffff;
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+  min-height: 72rpx;
+  line-height: 1.4;
+}
+
+.popup-placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.popup-desc {
+  display: block;
+  margin: 0 36rpx 36rpx;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+}
+
+.popup-footer {
+  display: flex;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.popup-btn {
+  flex: 1;
+  padding: 32rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-btn + .popup-btn {
+  border-left: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.popup-btn-text {
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.cancel-btn .popup-btn-text {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.confirm-btn .popup-btn-text {
+  color: #E9AE0E;
+}
+
+.danger-btn .popup-btn-text {
+  color: #ff6b6b;
+}

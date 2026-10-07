@@ -1,0 +1,83 @@
+<view class="page">
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar">
+      <view class="back-btn" bindtap="onBackTap">
+        <text class="back-text">‹</text>
+      </view>
+
+      <view class="search-bar">
+        <view class="camera-entry" bindtap="onCameraTap">
+          <image src="/images/home/MCPNG/camera_line.png" class="camera-icon" mode="aspectFit"></image>
+        </view>
+        <input
+          class="search-input"
+          value="{{query}}"
+          bindinput="onInputChange"
+          bindblur="onInputBlur"
+          bindconfirm="onSearchConfirm"
+          confirm-type="search"
+          placeholder="输入家电名称、型号或关键词"
+          placeholder-class="search-placeholder"
+        />
+      </view>
+    </view>
+  </view>
+
+  <view style="height: {{navHeight}}px"></view>
+
+  <scroll-view scroll-y class="content-scroll" style="height: {{scrollHeight}}px">
+    <block wx:if="{{!searched}}">
+      <view class="panel">
+        <view class="panel-head">
+          <text class="panel-title">历史记录</text>
+          <view class="panel-action" bindtap="onClearHistoryTap">清空</view>
+        </view>
+
+        <view class="chip-wrap">
+          <block wx:for="{{historyDisplayList}}" wx:key="*this">
+            <view class="chip" bindtap="onHistoryTap" data-word="{{item}}">{{item}}</view>
+          </block>
+          <view wx:if="{{historyList.length > 3}}" class="chip more-chip" bindtap="onToggleHistoryTap">
+            {{historyExpanded ? '收起' : '更多'}}
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{selectedImage}}" class="upload-preview">
+        <image src="{{selectedImage}}" class="preview-image" mode="aspectFill"></image>
+        <text class="preview-tip">图片已上传，可继续输入关键词搜索</text>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="panel-head result-head">
+        <text class="panel-title">搜索结果</text>
+        <view class="panel-action" bindtap="onClearSearchTap">重置</view>
+      </view>
+
+      <view wx:if="{{searchResults.length === 0}}" class="empty-box">
+        <text class="empty-text">未找到匹配说明书，请试试扫码、拍照或上传图片</text>
+      </view>
+
+      <view wx:else class="manual-grid">
+        <view
+          class="manual-card"
+          wx:for="{{searchResults}}"
+          wx:key="id"
+          bindtap="onManualTap"
+          data-item="{{item}}"
+        >
+          <view class="card-img-area">
+            <image wx:if="{{item.image}}" src="{{item.image}}" class="card-image" mode="aspectFill"></image>
+            <view wx:else class="card-placeholder">
+              <text class="placeholder-text">图片</text>
+            </view>
+          </view>
+          <view class="card-name-area">
+            <text class="card-name">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>

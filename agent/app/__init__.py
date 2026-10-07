@@ -1,0 +1,2 @@
+"""Smart appliance Agent service."""
+

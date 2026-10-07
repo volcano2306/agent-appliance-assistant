@@ -1,0 +1,29 @@
+{
+  "notice": "人工合成演示数据，不是任何厂商的实际说明书。",
+  "manuals": [
+    {
+      "id": "demo-air-purifier",
+      "productName": "演示空气净化器",
+      "brandName": "演示品牌",
+      "modelName": "DEMO-AP01",
+      "categoryCode": "air-purifier",
+      "summary": "合成说明书，用于公开项目检索演示。",
+      "pages": [
+        "【合成演示说明书】DEMO-AP01 空气净化器。演示操作：短按电源键开关机，模式键切换自动模式。设备清洁前应断开电源。以下内容只用于软件演示，真实使用应遵循实际设备说明书。",
+        "【合成故障样例】演示代码 DEMO-FILTER 表示提醒检查滤芯。演示排查顺序：断电、查看滤芯安装情况、阅读实际产品要求。不要将本演示代码用于其他设备。"
+      ]
+    },
+    {
+      "id": "demo-washing-machine",
+      "productName": "演示洗衣机",
+      "brandName": "演示品牌",
+      "modelName": "DEMO-WM01",
+      "categoryCode": "washing-machine",
+      "summary": "合成说明书，用于故障咨询和工单界面演示。",
+      "pages": [
+        "【合成演示说明书】DEMO-WM01 洗衣机。演示流程：选择程序后按开始键。衣物装载、清洁和维护以实际产品说明为准。本段只用于检索展示。",
+        "【合成故障样例】演示代码 DEMO-DRAIN 表示演示排水提示。可询问排水管是否弯折；不要自行拆修电气部件。闻到焦味、出现冒烟或漏电时应停止使用并联系专业人员。"
+      ]
+    }
+  ]
+}

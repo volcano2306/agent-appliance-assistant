@@ -1,0 +1,32 @@
+<view class="tab-bar-wrap">
+  <view class="center-btn-wrap" bindtap="onAddTap">
+    <view class="center-btn">
+      <text class="center-plus">+</text>
+    </view>
+  </view>
+
+  <view class="tab-bar">
+    <view class="tab-item {{selected === 0 ? 'active' : ''}}" bindtap="switchTab" data-path="/pages/index/index" data-index="0">
+      <text class="tab-label">首页</text>
+    </view>
+
+    <view class="tab-item {{selected === 1 ? 'active' : ''}}" bindtap="switchTab" data-path="/pages/toolbox/toolbox" data-index="1">
+      <text class="tab-label">工具箱</text>
+    </view>
+
+    <view class="tab-center-placeholder"></view>
+
+    <view class="tab-item {{selected === 2 ? 'active' : ''}}" bindtap="switchTab" data-path="/pages/message/message" data-index="2">
+      <text class="tab-label">消息</text>
+      <view wx:if="{{messageBadge > 0}}" class="tab-badge">
+        <text class="tab-badge-text">{{messageBadge > 99 ? '99+' : messageBadge}}</text>
+      </view>
+    </view>
+
+    <view class="tab-item {{selected === 3 ? 'active' : ''}}" bindtap="switchTab" data-path="/pages/profile/profile" data-index="3">
+      <text class="tab-label">我</text>
+    </view>
+  </view>
+
+  <view class="safe-area"></view>
+</view>

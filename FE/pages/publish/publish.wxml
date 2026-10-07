@@ -1,0 +1,51 @@
+<view class="page-container">
+  <view class="top-head">
+    <text class="page-title">添加说明书</text>
+    <text class="page-desc">上传本地 PDF 并完善资料</text>
+  </view>
+
+  <view class="panel">
+    <view class="upload-box" bindtap="onChooseFileTap">
+      <text class="upload-main">{{uploadFileName || '点击选择 PDF 文件'}}</text>
+      <text class="upload-sub">支持 PDF，建议小于 20MB</text>
+    </view>
+
+    <view class="upload-box image-box" bindtap="onChooseCoverTap">
+      <text class="upload-main">{{coverImageName || '点击选择封面图片（可选）'}}</text>
+      <text class="upload-sub">支持 JPG/PNG，用于首页卡片展示</text>
+      <image wx:if="{{coverImagePath}}" class="cover-preview" src="{{coverImagePath}}" mode="aspectFill"></image>
+    </view>
+
+    <view class="field-group">
+      <text class="field-label">产品名称 *</text>
+      <input class="field-input" value="{{productName}}" data-field="productName" bindinput="onFieldInput" placeholder="例如：美的挂机空调" />
+    </view>
+
+    <view class="field-group">
+      <text class="field-label">品牌名称</text>
+      <input class="field-input" value="{{brandName}}" data-field="brandName" bindinput="onFieldInput" placeholder="例如：美的" />
+    </view>
+
+    <view class="field-group">
+      <text class="field-label">型号</text>
+      <input class="field-input" value="{{modelName}}" data-field="modelName" bindinput="onFieldInput" placeholder="例如：KFR-35GW" />
+    </view>
+
+    <view class="field-group">
+      <text class="field-label">设备类型</text>
+      <input class="field-input" value="{{categoryCode}}" data-field="categoryCode" bindinput="onFieldInput" placeholder="例如：耳机、洗衣机、空调" />
+    </view>
+
+    <view class="field-group">
+      <text class="field-label">简洁说明</text>
+      <input class="field-input" value="{{shortNote}}" data-field="shortNote" bindinput="onFieldInput" placeholder="例如：客厅空调，节能静音" />
+    </view>
+
+    <view class="switch-row">
+      <text class="switch-label">公开到平台</text>
+      <switch checked="{{isPublic}}" color="#1f5e4d" bindchange="onPublicSwitch" />
+    </view>
+
+    <view class="primary-btn {{submitting ? 'disabled' : ''}}" bindtap="onSubmitUploadTap">{{submitting ? '提交中...' : '提交说明书'}}</view>
+  </view>
+</view>

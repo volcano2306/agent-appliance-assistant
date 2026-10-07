@@ -1,0 +1,106 @@
+<view class="page">
+  <!-- 自定义导航栏 -->
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar">
+      <!-- 返回按钮 -->
+      <view class="nav-back-btn" bindtap="onBackTap">
+        <text class="back-text">‹</text>
+      </view>
+      <!-- 标题 -->
+      <text class="nav-title">说明书详情</text>
+      <!-- 占位 -->
+      <view class="nav-placeholder"></view>
+    </view>
+  </view>
+
+  <!-- 导航栏占位 -->
+  <view style="height: {{navHeight}}px"></view>
+
+  <!-- 主内容区 -->
+  <scroll-view scroll-y class="main-scroll" style="height: {{scrollHeight}}px">
+    <view wx:if="{{manual}}" class="detail-container">
+      <!-- 产品信息卡片 -->
+      <view class="info-card">
+        <view class="info-row">
+          <text class="info-label">产品名称：</text>
+          <text class="info-value">{{manual.productName || manual.modelName}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">品牌：</text>
+          <text class="info-value">{{manual.brandName}}</text>
+        </view>
+        <view class="info-row" wx:if="{{manual.modelName}}">
+          <text class="info-label">型号：</text>
+          <text class="info-value">{{manual.modelName}}</text>
+        </view>
+        <view class="info-row" wx:if="{{manual.categoryCode}}">
+          <text class="info-label">分类：</text>
+          <text class="info-value">{{manual.categoryCode}}</text>
+        </view>
+      </view>
+
+      <!-- PDF预览区（80%高度，内部可滑动） -->
+      <view class="pdf-preview-card">
+        <view class="preview-header">
+          <text class="section-title">说明书预览</text>
+          <text class="page-count" wx:if="{{manual.pages}}">{{manual.pages}} 页</text>
+        </view>
+
+        <!-- 有页面图片：逐页图片滑动预览 -->
+        <scroll-view
+          wx:if="{{pageImages && pageImages.length > 0}}"
+          class="pdf-inner-scroll"
+          scroll-y="{{true}}"
+          enhanced="{{true}}"
+          show-scrollbar="{{true}}"
+          bounces="{{false}}"
+          style="height: {{previewHeight}}px"
+        >
+          <image
+            wx:for="{{pageImages}}"
+            wx:key="index"
+            class="pdf-page-img"
+            src="{{item}}"
+            mode="widthFix"
+            lazy-load="{{true}}"
+          />
+        </scroll-view>
+
+        <!-- 无页面图片时占位 -->
+        <view wx:else class="pdf-no-preview" style="height: {{previewHeight}}px">
+          <view class="no-preview-inner">
+            <text class="pdf-filename">{{manual.filename || 'PDF文件'}}</text>
+            <text class="pdf-hint">暂无预览，请点击下方按鈕查看完整文档</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="action-buttons">
+        <button class="action-btn primary" bindtap="onDownloadTap">
+          <text>查看PDF</text>
+        </button>
+        <button wx:if="{{type === 'platform'}}" class="action-btn secondary" bindtap="onAddToMyTap">
+          <text>添加到我的说明书</text>
+        </button>
+      </view>
+
+      <!-- 统计信息 -->
+      <view wx:if="{{manual.viewCount !== undefined}}" class="stats-card">
+        <view class="stat-item">
+          <text class="stat-label">浏览次数</text>
+          <text class="stat-value">{{manual.viewCount || 0}}</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-label">添加次数</text>
+          <text class="stat-value">{{manual.addedCount || 0}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载中 -->
+    <view wx:else class="loading-state">
+      <text class="loading-text">加载中...</text>
+    </view>
+  </scroll-view>
+</view>

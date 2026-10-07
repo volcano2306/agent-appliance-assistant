@@ -1,0 +1,233 @@
+/* 页面容器 */
+.page {
+  width: 100%;
+  height: 100vh;
+  background: #F5F5F5;
+}
+
+/* 自定义导航栏 */
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #205D4C;
+  z-index: 1000;
+}
+
+.nav-bar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  position: relative;
+}
+
+.nav-back-btn {
+  position: absolute;
+  left: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-text {
+  font-size: 48rpx;
+  color: #FFFFFF;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.nav-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.nav-placeholder {
+  position: absolute;
+  right: 16px;
+  width: 32px;
+}
+
+/* 主滚动区 */
+.main-scroll {
+  width: 100%;
+  background: #F5F5F5;
+}
+
+/* 详情容器 */
+.detail-container {
+  padding: 16px;
+}
+
+/* 信息卡片 */
+.info-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  font-size: 14px;
+  color: #666666;
+  min-width: 80px;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #333333;
+  font-weight: 500;
+  flex: 1;
+}
+
+/* section 标题（各卡片通用） */
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #205D4C;
+  display: block;
+}
+
+/* PDF预览卡片（外包装） */
+.pdf-preview-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #F8F8F8;
+  border-bottom: 1rpx solid #EEEEEE;
+}
+
+.page-count {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+/* 内嵌滑动区（展示 PDF 逐页图） */
+.pdf-inner-scroll {
+  width: 100%;
+  background: #525659;
+}
+
+.pdf-page-img {
+  width: 100%;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+/* 无预览占位框 */
+.pdf-no-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F5F5F5;
+}
+
+.no-preview-inner {
+  text-align: center;
+  padding: 0 32px;
+}
+
+.pdf-filename {
+  font-size: 28rpx;
+  color: #333333;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.pdf-hint {
+  font-size: 24rpx;
+  color: #999999;
+  display: block;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.action-btn {
+  flex: 1;
+  height: 44px;
+  border-radius: 8px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn.primary {
+  background: #205D4C;
+  color: #FFFFFF;
+}
+
+.action-btn.secondary {
+  background: #FFFFFF;
+  color: #205D4C;
+  border: 1px solid #205D4C;
+}
+
+/* 统计信息 */
+.stats-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #999999;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: #205D4C;
+  display: block;
+}
+
+/* 加载状态 */
+.loading-state {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 14px;
+  color: #999999;
+}

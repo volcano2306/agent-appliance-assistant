@@ -1,0 +1,27 @@
+/**app.wxss**/
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  font-size: 28rpx;
+  color: #1f2937;
+  background: #205D4C;
+  box-sizing: border-box;
+}
+
+view, text, scroll-view, image {
+  box-sizing: border-box;
+}
+
+/* ========== MingCute 图标字体 ========== */
+.mgc {
+  font-family: 'MingCute' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 图标已改为 PNG 图片（images/home/MCPNG/），不再使用 MingCute 字体图标 */
+

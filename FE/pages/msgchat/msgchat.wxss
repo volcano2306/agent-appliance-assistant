@@ -1,0 +1,252 @@
+/* ============================
+   基础页面
+   ============================ */
+.page {
+  min-height: 100vh;
+  background-color: #205D4C;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================
+   自定义导航栏
+   ============================ */
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #205D4C;
+  z-index: 100;
+}
+
+.nav-bar {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 32rpx;
+  position: relative;
+}
+
+.nav-back {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-back-text {
+  font-size: 52rpx;
+  color: #fff;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-mute-btn {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mute-icon {
+  width: 40rpx;
+  height: 40rpx;
+  opacity: 0.85;
+}
+
+.nav-chat-name {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 320rpx;
+}
+
+.nav-clear-btn {
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 8rpx;
+  flex-shrink: 0;
+}
+
+.nav-clear-text {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ============================
+   消息滚动区
+   ============================ */
+.chat-scroll {
+  flex: 1;
+  background-color: #1A4B3C;
+}
+
+.chat-list {
+  padding: 24rpx 24rpx 0;
+}
+
+/* ============================
+   消息行
+   ============================ */
+.msg-row {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 32rpx;
+  width: 100%;
+}
+
+.other-row {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.me-row {
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+/* ============================
+   头像
+   ============================ */
+.chat-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.other-avatar-img {
+  padding: 12rpx;
+  box-sizing: border-box;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.other-ph {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.me-ph {
+  background-color: #E9AE0E;
+}
+
+/* ============================
+   气泡
+   ============================ */
+.msg-bubble {
+  max-width: 520rpx;
+  padding: 20rpx 28rpx;
+  border-radius: 24rpx;
+}
+
+.other-row .msg-bubble {
+  margin-left: 16rpx;
+  border-bottom-left-radius: 6rpx;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.me-row .msg-bubble {
+  margin-right: 16rpx;
+  border-bottom-right-radius: 6rpx;
+  background-color: rgba(255, 255, 255, 0.92);
+}
+
+.msg-text {
+  font-size: 30rpx;
+  line-height: 1.55;
+}
+
+.other-text {
+  color: #fff;
+}
+
+.me-text {
+  color: #1A4B3C;
+}
+
+/* ============================
+   输入区
+   ============================ */
+.input-wrap {
+  border-top: 1rpx solid rgba(255, 255, 255, 0.18);
+  background: rgba(107, 144, 111, 0.8);
+  padding: 12rpx 18rpx;
+  box-sizing: border-box;
+  position: relative;
+  bottom: 20rpx;
+}
+
+.input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10rpx;
+}
+
+.chat-input {
+  flex: 1;
+  min-height: 64rpx;
+  max-height: 170rpx;
+  border-radius: 16rpx;
+  padding: 14rpx 16rpx;
+  background: rgba(255, 255, 255, 0.94);
+  color: #1f2937;
+  font-size: 28rpx;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.input-placeholder {
+  color: rgba(31, 41, 55, 0.45);
+  font-size: 28rpx;
+}
+
+.send-btn {
+  height: 64rpx;
+  min-width: 96rpx;
+  border-radius: 16rpx;
+  padding: 0 20rpx;
+  background: #2F7D69;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.send-text {
+  font-size: 26rpx;
+  color: #fff;
+  font-weight: 500;
+}
+
+.send-btn-disabled {
+  opacity: 0.65;
+}

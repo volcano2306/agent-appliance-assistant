@@ -1,0 +1,129 @@
+<view class="page">
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar">
+      <view class="nav-back" bindtap="onBackTap">
+        <text class="nav-back-text">‹</text>
+      </view>
+      <view class="nav-ai-btn" bindtap="onQuarterTap"></view>
+      <view class="nav-search" bindtap="onSearchTap">
+        <image src="/images/home/MCPNG/search_3_line.png" class="nav-icon-img" mode="aspectFit"></image>
+      </view>
+      <text class="nav-title">{{manual.navTitle || manual.name}}</text>
+    </view>
+  </view>
+
+  <view style="height: {{navHeight}}px"></view>
+
+  <scroll-view scroll-y class="main-scroll" style="height: {{scrollHeight}}px">
+    <view class="content-wrap">
+      <view class="hero-box">
+        <view class="hero-image-wrap">
+          <image wx:if="{{manual.image}}" src="{{manual.image}}" class="hero-image" mode="aspectFill"></image>
+          <view wx:else class="hero-image-placeholder">图片</view>
+        </view>
+        <view class="hero-meta">
+          <text class="hero-name">{{manual.name}}</text>
+          <text class="hero-intro">{{manual.intro || '暂无产品介绍'}}</text>
+        </view>
+      </view>
+
+      <view class="preview-box">
+        <view class="preview-head">
+          <text class="preview-title">说明书预览</text>
+          <view class="download-btn" bindtap="onDownloadTap">
+            <text class="download-text">下载</text>
+          </view>
+        </view>
+
+        <scroll-view class="preview-scroll" scroll-y="{{true}}" style="height: {{previewHeight}}px">
+          <block wx:if="{{pageImages && pageImages.length > 0}}">
+            <image
+              wx:for="{{pageImages}}"
+              wx:key="index"
+              class="preview-page"
+              src="{{item}}"
+              mode="widthFix"
+              lazy-load="{{true}}"
+            ></image>
+          </block>
+          <block wx:else>
+            <text class="manual-text">{{manual.manualContent || '暂无说明书预览内容，请点击右上角下载按钮查看 PDF 文件。'}}</text>
+          </block>
+        </scroll-view>
+      </view>
+
+      <view class="comment-board">
+        <view class="comment-summary" wx:if="{{!commentsLoading}}">共{{comments.length}}条评论</view>
+        <view wx:if="{{commentsLoading}}" class="comment-empty">评论加载中...</view>
+        <block wx:elif="{{comments.length > 0}}">
+          <view class="comment-card" wx:for="{{comments}}" wx:key="id">
+            <view class="comment-head">
+              <block wx:if="{{item.avatarUrl}}">
+                <image class="comment-avatar-img" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+              </block>
+              <view wx:else class="comment-avatar-text">{{item.initials}}</view>
+              <view class="comment-meta">
+                <text class="comment-name">{{item.fromUserName}}</text>
+              </view>
+            </view>
+            <view class="comment-content">{{item.content}}</view>
+            <view class="comment-footer">
+              <view class="comment-left-actions">
+                <text class="comment-time">{{item.timeText}}</text>
+                <text class="comment-reply" bindtap="onReplyTap" data-id="{{item.id}}">回复</text>
+              </view>
+              <view class="comment-like {{item.likedByMe ? 'is-active' : ''}}" bindtap="onCommentLikeTap" data-id="{{item.id}}">
+                <text class="comment-heart">{{item.likedByMe ? '♥' : '♡'}}</text>
+                <text class="comment-like-count">{{item.likeCount || 0}}</text>
+              </view>
+            </view>
+            <view wx:if="{{item.replies && item.replies.length}}" class="reply-list">
+              <view class="reply-item" wx:for="{{item.replies}}" wx:for-item="reply" wx:key="id">
+                <view class="reply-head">
+                  <view class="reply-meta">
+                    <text class="reply-name">{{reply.fromUserName}}</text>
+                    <view class="reply-body">
+                      <block wx:if="{{reply.toUserName}}">
+                        <text class="reply-prefix">回复</text>
+                        <text class="reply-target">{{reply.toUserName}}</text>
+                        <text class="reply-colon">：</text>
+                      </block>
+                      <text class="reply-content">{{reply.content}}</text>
+                    </view>
+                  </view>
+                </view>
+                <view class="reply-footer">
+                  <view class="reply-left-actions">
+                    <text class="reply-time">{{reply.timeText}}</text>
+                    <text class="reply-reply" bindtap="onReplyTap" data-id="{{reply.id}}">回复</text>
+                  </view>
+                  <view class="reply-like {{reply.likedByMe ? 'is-active' : ''}}" bindtap="onCommentLikeTap" data-id="{{reply.id}}">
+                    <text class="reply-heart">{{reply.likedByMe ? '♥' : '♡'}}</text>
+                    <text class="reply-like-count">{{reply.likeCount || 0}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view wx:else class="comment-empty">还没有评论，来抢沙发吧</view>
+      </view>
+      <view style="height: 20rpx;"></view>
+    </view>
+  </scroll-view>
+
+  <view class="action-bar" style="padding-bottom: {{safeAreaBottom}}px; min-height: {{actionBarHeight}}px;">
+    <view class="comment-input" bindtap="onCommentTap">
+      <text class="comment-input-text">发表你的看法</text>
+    </view>
+
+    <view class="action-icons">
+      <view class="icon-btn like-btn {{manualLiked ? 'is-active' : ''}}" bindtap="onThumbTap">
+        <image src="{{manualLiked ? '/images/full/thumb_up_2_fill.png' : '/images/sms/MCPNG/thumb_up_2_line.png'}}" class="icon-img" mode="aspectFit"></image>
+      </view>
+      <view class="icon-btn collect-btn {{manualCollected ? 'is-active' : ''}}" bindtap="onPlusTap">
+        <image src="{{manualCollected ? '/images/full/plus_fill.png' : '/images/sms/MCPNG/plus_line.png'}}" class="icon-img" mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+</view>

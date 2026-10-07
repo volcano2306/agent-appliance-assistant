@@ -1,0 +1,83 @@
+<view class="page">
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar">
+      <view class="nav-back" bindtap="onBackTap">
+        <text class="nav-back-text">></text>
+      </view>
+      <text class="nav-title">设置</text>
+    </view>
+  </view>
+
+  <view style="height: {{navHeight}}px"></view>
+
+  <scroll-view scroll-y class="main-scroll">
+    <view class="page-content">
+      <view class="section-card">
+        <view class="section-head">
+          <text class="section-title">AI 助手设置</text>
+          <text class="section-subtitle">控制会话保存和说明书引用展示</text>
+        </view>
+
+        <view class="switch-row">
+          <view class="setting-copy">
+            <text class="setting-label">保存聊天历史</text>
+            <text class="setting-desc">关闭后 AI 页不记录和恢复会话</text>
+          </view>
+          <switch color="#E9AE0E" checked="{{settings.historyEnabled}}" bindchange="onHistorySwitch" />
+        </view>
+
+        <view class="switch-row">
+          <view class="setting-copy">
+            <text class="setting-label">显示说明书引用</text>
+            <text class="setting-desc">在回答下方显示页码和引用依据</text>
+          </view>
+          <switch color="#E9AE0E" checked="{{settings.showSources}}" bindchange="onSourceSwitch" />
+        </view>
+      </view>
+
+      <view class="section-card">
+        <view class="section-head">
+          <text class="section-title">存储与缓存</text>
+          <text class="section-subtitle">清理历史和本地缓存</text>
+        </view>
+
+        <view class="setting-row">
+          <view class="setting-copy">
+            <text class="setting-label">当前缓存</text>
+            <text class="setting-desc">{{cacheSizeText}}</text>
+          </view>
+        </view>
+
+        <view class="action-row">
+          <view class="action-btn action-btn-secondary" bindtap="onClearCacheTap">清理本地缓存</view>
+          <view class="action-btn action-btn-danger" bindtap="onClearHistoryTap">清空 AI 历史</view>
+        </view>
+      </view>
+
+      <view class="section-card">
+        <view class="section-head">
+          <text class="section-title">关于与支持</text>
+          <text class="section-subtitle">版本信息和协议说明</text>
+        </view>
+
+        <view class="setting-row" bindtap="onAboutTap">
+          <view class="setting-copy">
+            <text class="setting-label">关于我们</text>
+            <text class="setting-desc">版本 {{appVersion}}</text>
+          </view>
+          <text class="setting-arrow">></text>
+        </view>
+
+        <view class="setting-row" bindtap="onPolicyTap">
+          <view class="setting-copy">
+            <text class="setting-label">协议与隐私</text>
+            <text class="setting-desc">查看用户协议和隐私政策说明</text>
+          </view>
+          <text class="setting-arrow">></text>
+        </view>
+      </view>
+    </view>
+
+    <view style="height: {{safeAreaBottom}}px"></view>
+  </scroll-view>
+</view>

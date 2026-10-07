@@ -1,0 +1,63 @@
+<view class="page">
+  <!-- 自定义导航栏 -->
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar">
+      <!-- 左侧：返回按钮 -->
+      <view class="nav-back-btn" bindtap="onBackTap">
+        <text class="back-text">‹</text>
+      </view>
+      <!-- 标题水平居中 -->
+      <text class="nav-title">相机板块</text>
+      <!-- 右侧占位（保持居中） -->
+      <view class="nav-placeholder"></view>
+    </view>
+  </view>
+
+  <!-- 导航栏占位高度 -->
+  <view style="height: {{navHeight}}px"></view>
+
+  <!-- 可滚动内容区 -->
+  <scroll-view scroll-y class="main-scroll" style="height: {{scrollHeight}}px">
+    <!-- 相机说明书板块 -->
+    <view class="manual-section">
+      <text class="manual-title">平台相机说明书</text>
+
+      <!-- 说明书卡片网格 -->
+      <view class="manual-grid">
+        <view 
+          class="manual-card" 
+          wx:for="{{manuals}}" 
+          wx:key="id"
+          bindtap="onManualTap"
+          data-item="{{item}}"
+        >
+          <!-- 图片区 -->
+          <view class="card-img-area">
+            <image 
+              wx:if="{{item.image}}" 
+              src="{{item.image}}" 
+              mode="aspectFill" 
+              class="card-image"
+            ></image>
+            <view wx:else class="card-placeholder">
+              <text class="placeholder-text">{{item.brandName}}</text>
+            </view>
+          </view>
+          <!-- 命名区 -->
+          <view class="card-name-area">
+            <text class="card-name">{{item.name}}</text>
+            <text class="card-brand">{{item.brandName}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 空状态提示 -->
+      <view wx:if="{{manuals.length === 0}}" class="empty-state">
+        <text class="empty-text">暂无相机说明书</text>
+      </view>
+    </view>
+
+    <!-- 底部留白 -->
+    <view style="height: {{tabBarHeight}}px;"></view>
+  </scroll-view>
+</view>

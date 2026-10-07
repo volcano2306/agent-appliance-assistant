@@ -1,0 +1,14 @@
+package com.example.demo.repository;
+
+import com.example.demo.model.AiMessage;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.List;
+
+public interface AiMessageRepository extends MongoRepository<AiMessage, String> {
+    List<AiMessage> findByConversationIdOrderByCreatedAtAsc(String conversationId);
+
+    List<AiMessage> findTop6ByConversationIdOrderByCreatedAtDesc(String conversationId);
+
+    void deleteByConversationId(String conversationId);
+}

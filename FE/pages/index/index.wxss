@@ -1,0 +1,197 @@
+/**index.wxss**/
+
+/* ========== 页面基础 ========== */
+page {
+  background: #205D4C;
+}
+
+.page {
+  min-height: 100vh;
+  background: #205D4C;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== 自定义导航栏 ========== */
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 32rpx;
+  position: relative;
+}
+
+/* AI 跳转按钮 — 左上角圆角长方形 */
+.nav-ai-btn {
+  width: 64rpx;
+  height: 64rpx;
+  background: #E9AE0E;
+  border-radius: 20rpx 8rpx 20rpx 8rpx;
+  flex-shrink: 0;
+}
+
+.nav-search {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12rpx;
+  flex-shrink: 0;
+}
+
+.nav-icon-img {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+/* 标题水平居中（绝对定位） */
+.nav-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #ffffff;
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ========== 可滚动区域 ========== */
+.main-scroll {
+  background: #205D4C;
+}
+
+/* ========== 功能导航 ========== */
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 28rpx 24rpx 36rpx;
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.nav-icon-btn {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-func-img {
+  width: 52rpx;
+  height: 52rpx;
+}
+
+.nav-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ========== 我的说明书板块 ========== */
+.manual-section {
+  padding: 0 32rpx;
+}
+
+.manual-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 28rpx;
+}
+
+/* ========== 说明书卡片网格 ========== */
+.manual-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.manual-card {
+  width: 48%;
+  border-radius: 24rpx;
+  overflow: hidden;
+  margin-bottom: 24rpx;
+  background: rgba(255, 255, 255, 0.12);
+  border: 2rpx solid rgba(255, 255, 255, 0.15);
+  position: relative;
+}
+
+.delete-bubble {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 136rpx;
+  height: 136rpx;
+  border-radius: 999rpx;
+  background: rgba(236, 192, 201, 0.75);
+  color: #3f2a30;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+
+.card-img-area {
+  width: 100%;
+  height: 260rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+}
+
+.card-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.placeholder-text {
+  font-size: 30rpx;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.card-name-area {
+  padding: 18rpx 0;
+  text-align: center;
+  border-top: 2rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.card-name {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.manual-empty {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 26rpx;
+  padding: 8rpx 2rpx 20rpx;
+}
