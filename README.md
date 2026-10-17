@@ -28,6 +28,96 @@ flowchart LR
     Agent --> Search[商品搜索 / 语音识别服务]
 ```
 
+## Agent 架构
+
+采用 Java + Python 双服务架构：Java 提供业务接口与会话管理，Python 负责 Agent 编排、工具调用和 RAG 检索。
+
+```mermaid
+flowchart LR
+    U["小程序提问"] --> J["Java 接口"]
+    J --> P["FastAPI 校验"]
+    P --> C["组装上下文"]
+    C --> L["LLM 调用"]
+    L --> D{"调用工具？"}
+
+    D -->|否| O["响应校验"]
+    D -->|是| T["工具分发"]
+
+    subgraph TOOLS["工具层"]
+        R["说明书检索"]
+        F["故障排查"]
+        W["搜索与推荐"]
+        B["收藏与报修"]
+    end
+
+    T --> R
+    T --> F
+    T --> W
+    T --> B
+
+    subgraph RAG["混合检索"]
+        Q["检索 Query"]
+        BM["BM25 Top20"]
+        E["Query 向量化"]
+        V["向量 Top20"]
+        RR["RRF 等权 1:1"]
+        K["融合 Top10"]
+        S["片段与引用"]
+
+        Q --> BM
+        Q --> E
+        E --> V
+        BM --> RR
+        V --> RR
+        RR --> K
+        K --> S
+    end
+
+    R --> Q
+    F --> Q
+
+    M[("MongoDB")]
+    QD[("Qdrant")]
+
+    M --> BM
+    QD --> V
+    QD -.->|fragmentId| M
+
+    W --> API["SerpApi"]
+    API --> TR["追加工具结果"]
+
+    B --> JB["Java 业务校验"]
+    JB --> BR["真实操作结果"]
+    BR --> TR
+
+    S --> TR
+    TR --> N{"已调用4次？"}
+    N -->|否| L
+    N -->|是| SUM["第5次仅总结"]
+    SUM --> O
+
+    O --> SAVE["保存会话"]
+    SAVE --> A["前端展示"]
+
+    subgraph INDEX["离线建库"]
+        PDF["PDF"] --> TEXT["提取正文页码"]
+        TEXT --> CH["切片 384/64"]
+        CH --> EMB["Embedding"]
+    end
+
+    CH -.->|正文与来源| M
+    EMB -.->|向量与标识| QD
+
+    J -.-> MEM["可选历史摘要"]
+    MEM -.-> C
+```
+
+- **知识库构建：**按 384 token 长度、64 token 重叠切片，正文与来源存入 MongoDB，向量写入 Qdrant。
+- **混合检索：**BM25 与向量检索各召回 20 条，经等权 RRF 融合后返回前 10 条及引用信息。
+- **工具调用：**模型按需调用检索、故障排查、联网搜索、商品推荐、收藏及报修工具。
+- **循环控制：**最多进行 4 次常规模型调用；第 4 次仍返回工具调用时，执行工具后增加第 5 次调用，仅总结已有结果。
+- **上下文管理：**结合 Prompt、Few-shot、历史消息及当前问题组织上下文；历史摘要压缩为可选能力，当前默认关闭。
+
 ## 功能入口
 
 - 说明书：分类、关键词搜索、PDF/图片阅读、上传、收藏、批注与评论。
