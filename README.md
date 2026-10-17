@@ -31,8 +31,22 @@ flowchart LR
 ## 功能入口
 
 - 说明书：分类、关键词搜索、PDF/图片阅读、上传、收藏、批注与评论。
+<p align="center">
+<img width="485" height="350" alt="image" src="https://github.com/user-attachments/assets/27a22c09-6334-44fd-a7e9-eb2908459c86" />
+<img width="485" height="350" alt="image" src="https://github.com/user-attachments/assets/ceb89ddc-136c-46ba-bab9-edc13d5b4875" />
+</p>
+
 - AI：说明书问答、故障咨询、按意图调用五类工具，返回证据来源与页码。
+<p align="center">
+<img width="330" height="350" alt="image" src="https://github.com/user-attachments/assets/ee0b982f-fe21-4ddb-954e-44058385b975" />
+<img width="330" height="350" alt="image" src="https://github.com/user-attachments/assets/8d9347bf-5786-470a-b0a0-d71cbd007eed" />
+</p>
+
 - 服务：收藏说明书、经确认创建报修单、查看及取消工单、消息与设备管理。
+<p align="center">
+<img width="485" height="350" alt="image" src="https://github.com/user-attachments/assets/ece9f99b-c8ff-4ea3-9acf-d0a099810809" />
+</p>
+
 - 会话：会话列表、标题修改与删除；实现按阈值批量压缩及重复请求控制。
 
 功能实现和外部依赖的边界见 [功能说明](docs/FEATURES.md)。登录目前为 Demo 实现；会话记忆默认关闭，启用前需要配置双方参数并确认模型上下文容量。
