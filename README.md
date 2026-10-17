@@ -28,10 +28,6 @@ flowchart LR
     Agent --> Search[商品搜索 / 语音识别服务]
 ```
 
-## Agent 架构
-
-采用 Java + Python 双服务架构：Java 提供业务接口与会话管理，Python 负责 Agent 编排、工具调用和 RAG 检索。
-
 ```mermaid
 flowchart LR
     U["小程序提问"] --> J["Java 接口"]
@@ -112,6 +108,9 @@ flowchart LR
     MEM -.-> C
 ```
 
+## Agent 架构
+
+采用 Java + Python 双服务架构：Java 提供业务接口与会话管理，Python 负责 Agent 编排、工具调用和 RAG 检索。
 - **知识库构建：**按 384 token 长度、64 token 重叠切片，正文与来源存入 MongoDB，向量写入 Qdrant。
 - **混合检索：**BM25 与向量检索各召回 20 条，经等权 RRF 融合后返回前 10 条及引用信息。
 - **工具调用：**模型按需调用检索、故障排查、联网搜索、商品推荐、收藏及报修工具。
@@ -131,80 +130,6 @@ flowchart LR
 <img width="330" height="350" alt="image" src="https://github.com/user-attachments/assets/ee0b982f-fe21-4ddb-954e-44058385b975" />
 <img width="330" height="350" alt="image" src="https://github.com/user-attachments/assets/8d9347bf-5786-470a-b0a0-d71cbd007eed" />
 </p>
-
-```mermaid
-flowchart LR
-    U["微信小程序<br/>用户提问"] --> J["Java / Spring Boot<br/>QAService：接收请求、读取会话"]
-    J --> P["Python / FastAPI<br/>参数校验与请求解析"]
-    P --> C["组装模型上下文<br/>System Prompt + Few-shot<br/>历史消息 + 当前问题"]
-    C --> L["调用 LLM<br/>常规调用最多 4 次"]
-    L --> D{"是否返回<br/>工具调用？"}
-
-    D -->|否| O["处理最终回答<br/>JSON 解析、字段校验<br/>写操作结果一致性检查"]
-    D -->|是| T["工具分发<br/>解析工具名称与参数<br/>校验并执行"]
-
-    subgraph TOOLS["工具层"]
-        R["说明书检索"]
-        F["故障排查<br/>结合型号、现象与说明书证据"]
-        W["联网搜索与商品推荐<br/>SerpApi Google Search / Shopping"]
-        B["业务操作<br/>创建报修单、加入我的说明书"]
-    end
-
-    T --> R
-    T --> F
-    T --> W
-    T --> B
-
-    subgraph RAG["RAG 混合检索"]
-        Q["检索 query<br/>结合说明书范围过滤"]
-        BM["BM25 关键词召回<br/>Top 20"]
-        V["Query Embedding<br/>Qdrant 向量召回 Top 20"]
-        RR["RRF 融合<br/>两路等权 1:1"]
-        K["最终 Top 10<br/>组织片段、页码与来源"]
-
-        Q --> BM
-        Q --> V
-        BM --> RR
-        V --> RR
-        RR --> K
-    end
-
-    R --> Q
-    F --> Q
-
-    M[("MongoDB<br/>说明书元数据、fragments")]
-    QD[("Qdrant<br/>片段向量与关联标识")]
-
-    M --> BM
-    QD --> V
-    QD -.->|fragmentId 关联| M
-
-    B --> JB["Java 业务接口<br/>登录、权限及业务校验"]
-    JB --> BR["返回真实操作结果<br/>成功、失败或结果不确定"]
-
-    K --> TR["工具结果追加至上下文"]
-    W --> TR
-    BR --> TR
-    TR --> N{"已完成第 4 次<br/>常规模型调用？"}
-    N -->|否| L
-    N -->|是| S["第 5 次模型调用<br/>禁止继续调用工具<br/>基于已有结果总结"]
-    S --> O
-
-    O --> JP["Java 保存会话与回答"]
-    JP --> A["小程序展示<br/>回答、引用与操作结果"]
-
-    subgraph INDEX["离线知识库构建"]
-        PDF["PDF 说明书"] --> TEXT["提取正文与页码"]
-        TEXT --> CH["切片<br/>384 token / 重叠 64 token"]
-        CH --> E["Embedding 编码"]
-    end
-
-    CH -.->|保存片段与来源| M
-    E -.->|写入向量| QD
-
-    J -.-> MEM["可选：历史摘要压缩<br/>最近 N 轮原文 + 更早历史摘要<br/>当前默认关闭"]
-    MEM -.-> C
-```
 
 - 服务：收藏说明书、经确认创建报修单、查看及取消工单、消息与设备管理。
 <p align="center">
