@@ -147,7 +147,7 @@ flowchart LR
 3. 可导入 `data/demo-manuals.json` 的合成说明书，再建立向量索引。
 4. 用微信开发者工具打开 `FE/`；本机开发后端地址为 `http://localhost:18083`。
 
-模型配置保留历史环境变量名 `DEEPSEEK_*`，实际默认模型为 `qwen3.8-flash-next`，网关地址可配置。整理版没有模型密钥，付费模型不会在测试中自动调用。
+模型配置保留历史环境变量名 `DEEPSEEK_*`，实际默认模型为 `qwen3.8-flash-next`，网关地址可配置。
 
 ## 文档导航
 
